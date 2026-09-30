@@ -1,0 +1,79 @@
+---
+title: 'Lab Activity: Arithmetic Operations & Basic Data Types in R'
+author: "John Lester Estember"
+date: "2026-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part 1 - Arithmetic
+
+```{r}
+a <- 17
+b <- 5
+
+result1 <- a + b
+result2 <- a - b
+result3 <- a * b
+result4 <- a / b
+result5 <- a %% b
+result6 <- a %/% b
+result1
+result2
+result3
+result4
+result5
+result6
+
+c <- 2 ^ 10
+c
+```
+1. The 17/5 gives full decimal answer (3.4), while 17 %/% 5 gives the whole number portion and 17 %% 5 gives the remainder.
+2. My prediction is 1 and 3 and I am correct.
+
+PART 2 BASIC DATA TYPES
+```{r}
+x <- 42
+y <- 42L
+z <- "42"
+w <- TRUE
+v <- 3 + 21
+
+typeof(x)
+typeof(y)
+typeof(z)
+typeof(w)
+typeof(v)
+class(x)
+class(y)
+class(z)
+class(w)
+class(v)
+mode(x)
+mode(y)
+mode(z)
+mode(w)
+mode(v)
+```
+3. Writing x <- 42 tells R to save the number as a regular decimal, while adding the L in y <- 42L forces R to save it as a strict whole number. That is why they give different data types.
+
+4. Yes, they can be different because each function checks a completely different property of an object.
+
+PART C - Type Conversion
+```{r}
+num_string <- "123"
+num_val <- as.numeric(num_string)
+typeof(num_val)
+class(num_val)
+mode(num_val)
+as.logical(0)
+as.logical(1)
+bad_string <- "hello123"
+as.numeric(bad_string)
+```
+5. R gives a warning and NA instead of stopping because the conversion cannot be completed, but the rest of the script may still be able to continue running. 
+
+6.
