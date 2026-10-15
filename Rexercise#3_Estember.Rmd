@@ -1,0 +1,186 @@
+---
+title: "Rexercise#3_Estember"
+author: "JL Estember"
+date: "2026-10-15"
+output: html_document
+---
+
+---
+title: "Untitled"
+author: "JohnLesterEstember"
+date: "2026-10-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+### PART A
+```{r}
+scores <- c(88, 92, 79, 95, 84)
+
+subjects <- c("Math", "Science", "English", "History", "PE")
+
+odds <- seq(1, 19, by = 2)
+five_nums <- seq(0, 1, length.out = 5)
+
+rep_a <- rep("A", 4)
+rep_each <- rep(c("A", "B"), each = 2)
+rep_times <- rep(c("A", "B"), times = 2)
+
+age <- c(15, 28, 32, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 12, 42, 53, 41, 51, 35, 24, 33, 8)
+```
+### Question#1
+
+A. How many data points?
+
+There are 34 data points in the age vector. The length() function counts the total number of elements.
+
+
+
+B. Find the reciprocal of age?
+
+
+1 / age
+
+
+
+C. Assign also new_age <- c(age, 0, age). What happens to new_age?
+
+
+It basically stitches everything together into one big vector. It takes the original 34 ages, slaps a 0 right in the middle, and then repeats the whole 34-age list again at the end, making the new total length 69 elements.
+
+
+
+D.
+
+The lowest number (minimum age) is 8, and the highest number (maximum age) is 57.
+
+
+
+### Question#2
+
+each repeats the individual items right next to each other before moving on (so c("A", "B") with each = 2 becomes "A", "A", "B", "B"). On the other hand, times repeats the whole group as a complete block (so times = 2 loops the entire sequence to get "A", "B", "A", "B").
+
+#### Question#3
+
+The by argument controls the specific step size or interval between consecutive numbers in the sequence. Meanwhile, length.out determines the total number of items the final vector will contain, letting R calculate the spacing automatically. You would use by when you need fixed, specific intervals, and length.out when you need a specific sample size or a fixed number of divisions.
+
+### Question#4
+A. vec_num <- 20:60
+B. mean(vec_num)
+C. sum(vec_num)
+D. length(vec_num)
+
+### PART B
+```{r}
+grades <- scores
+names(grades) <- subjects
+
+grades[3]
+
+grades[c(1, 4)]
+
+grades[c("Science", "PE")]
+
+grades[-c(1, 4)]
+
+grades[grades >= 85]
+```
+### Question#5
+
+Negative indexing situation: Dropping a specific, known outlier or corrupted row (such as an unwanted header) when you already know its exact position.
+
+Logical indexing situation: Filtering data dynamically based on a threshold or condition (like extracting passing grades) without needing to know exact row numbers.
+
+### Question #6
+Result & Explanation: R returns NA instead of crashing with an error. It treats out of bounds indices as missing data to prevent long data-cleaning scripts from breaking on incomplete entries.
+
+### Question#7
+Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+
+### PART C
+```{r}
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+z <- c(1, 0, 1, 0, 1, 0)
+short <- c(10, 20)
+fruits <- c("apple", "banana", "orange")
+
+x + y
+x * 2
+z + short
+
+fruits <- append(fruits, "date")
+fruits <- append(fruits, "kiwi", after = 1)
+```
+
+
+### Question#8
+R repeatedly recycled the shorter vector's values until it matched the length of the longer vector.
+
+### Question#9
+z to c(1, 0, 1) works silently because 3 divides evenly into 6. Adding to c(1, 0, 1, 1) gives a warning because 4 is not a multiple of 6.
+
+### PART D
+```{r}
+student <- list(
+  name = "Maria Santos",
+  age = 20,
+  grades = c(88, 92, 79),
+  is_enrolled = TRUE
+)
+```
+
+```{r}
+student["grades"]
+class(student["grades"])
+```
+
+```{r}
+student[["grades"]]
+class(student[["grades"]])
+```
+
+```{r}
+student$name
+```
+
+```{r}
+student$grades[2]
+```
+```
+### Question#10
+Single brackets [ keep the list container structure (returning a sub-list), whereas double brackets [[ unpack the contents directly, changing the object class to match the underlying data type
+
+### Question#11
+Vectors only hold one uniform data type so single brackets are enough, but lists can mix totally different things together so you need double brackets to dig inside.
+
+### PART E
+```{r}
+inventory <- list(
+  item = c("Pen", "Notebook", "Pencil"),
+  price = c(10, 50, 5),
+  in_stock = c(TRUE, TRUE, FALSE)
+)
+
+inventory$item[inventory$in_stock]
+
+inventory$item <- append(inventory$item, "Ruler")
+inventory$price <- append(inventory$price, 15.00)
+inventory$in_stock <- append(inventory$in_stock, TRUE)
+```
+### Question#12
+It works because R evaluates inventory $in_stock first to get a logical filter, which then tells inventory$ item exactly which index positions to keep. 
+
+### Question#13
+Keeping them as separate vectors is risky because if one vector gets accidentally reordered, sorted, or truncated independently, it breaks the alignment of your data and corrupts your records, whereas lists keep everything bound together safely.
+
+### Conclusion
+
+Vectors are atomic structures that only hold a single data type, making them ideal for uniform numerical or text data, while lists can store mixed data types and structures together. You would choose a vector for simple, mathematical operations or uniform sequences, and a list when you need to group heterogeneous or hierarchical data under a single object. Using a list also helps keep related variables securely bundled together, preventing data mismatch issues that happen when managing separate vectors.
+
+
