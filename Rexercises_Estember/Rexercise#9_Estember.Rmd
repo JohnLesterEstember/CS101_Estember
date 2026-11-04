@@ -1,0 +1,100 @@
+---
+title: "Rexercise#9_Estember"
+author: "JL Estember"
+date: "2026-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+#Part A
+
+#Question 1A
+shoe_size <- c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5,
+               10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5,
+               7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0)
+
+height <- c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0,
+            74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0,
+            64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0)
+
+gender <- c("F", "F", "F", "F", "M", "F", "F", "M", "M", "F",
+            "M", "F", "M", "M", "M", "M", "F", "F", "M", "F",
+            "F", "M", "M", "F", "M", "M", "M", "M")
+
+shoesize <- data.frame(shoe_size, height, gender)
+
+write.csv(shoesize, "shoesize.csv", row.names = FALSE)
+
+shoesize
+
+#Question 1B
+shoesize <- read.csv("shoesize.csv")
+
+tail(shoesize, 5)
+
+#Question 1C
+str(shoesize)
+
+#Question 1D
+dim(shoesize)
+nrow(shoesize)
+ncol(shoesize)
+
+#Question 1E
+summary(shoesize)
+#str() tells you what the data looks like, while summary() tells you what the data contains statistically.
+
+#Question 1F
+males   <- shoesize[shoesize$gender == "M", ]
+females <- shoesize[shoesize$gender == "F", ]
+
+males
+females
+
+#Question 1G
+mean(shoesize$shoe_size)
+mean(shoesize$height)
+
+#Question 1H
+cor(shoesize$shoe_size, shoesize$height)
+#Yes, there is a moderate to strong positive relationship. A correlation of 0.66 indicates that as shoe size increases, height tends to increase as well.
+
+#Question 2
+shoesize$gender <- factor(shoesize$gender)
+
+levels(shoesize$gender)
+shoesize$gender
+
+#Question 3
+#This makes an R Markdown document more reliable because it always looks for files in the same folder where the .Rmd file is saved. This means that when someone else opens and runs the document, the imported files are easier to find, even if their working directory is different. It helps make the results more consistent and reproducible.
+
+#Question 4
+str(shoesize)
+#The Gender column is usually assigned as a character or factor, which is expected because it contains text values. If a column like ShoeSize is accidentally imported as character, R might not be able to perform mathematical operations or calculations properly. This could lead to errors or incorrect results in the analysis.
+
+#Question 5
+#It is good to check both head(shoes) and tail(shoes) because head() only shows the first few rows, while tail() shows the last few rows. Checking both helps us see if the data was imported completely and correctly. For example, head() alone might not catch missing values, incorrect entries, or formatting problems at the end of the file.
+
+#Question 6A
+cor(shoesize$shoe_size, shoesize$height)
+
+#Question 6B
+shoesize[shoesize$shoe_size >= 11, ]
+
+#Question 7
+# Mean height by gender
+mean(males$height)
+mean(females$height)
+
+# Mean shoe size by gender
+mean(males$shoe_size)
+mean(females$shoe_size)
+
+#The comparison helps show the differences in average height and shoe size between females and males. Generally, males may have higher average height and shoe size than females. This suggests that gender could be an important factor when studying the relationship between height and shoe size. We should compare the relationship within each gender separately because gender differences might affect the overall results.
+```
