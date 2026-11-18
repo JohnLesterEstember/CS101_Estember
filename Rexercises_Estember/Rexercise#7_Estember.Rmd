@@ -1,0 +1,96 @@
+---
+title: "Rexercise#7_Estember"
+author: "JL Estember"
+date: "2026-11-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+#Part A
+
+### Question 1
+
+
+```{r}
+Respondent<- 1:20
+Sex<-c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2)
+FathersOccupation<-c(1,3,3,3,1,2,3,1,1,1,3,2,1,3,3,1,3,1,2,1)
+PersonsAtHome<-c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6)
+SiblingsAtSchool<-c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2)
+TypesOfHouses<-c(1,2,3,1,1,3,3,1,2,3,2,3,2,2,3,3,3,3,3,2)
+
+length(Respondent)
+length(Sex)
+length(FathersOccupation)
+length(PersonsAtHome)
+length(SiblingsAtSchool)
+length(TypesOfHouses)
+
+survey<-data.frame(Respondent, Sex, FathersOccupation,
+                     PersonsAtHome, SiblingsAtSchool, TypesOfHouses)
+print(survey)
+
+```
+
+
+### Question A1A
+str(survey)
+summary(survey)
+
+### Question A1B
+dim(survey)
+nrow(survey)
+ncol(survey)
+
+### Question A1C
+survey$Sex<-factor(survey$Sex,levels = c(1, 2),labels = c("Male", "Female"))
+
+survey$FathersOccupation<-factor(survey$FathersOccupation,levels = c(1, 2, 3),labels = c("Farmer", "Driver", "Others"))
+
+survey$TypesOfHouses<-factor(survey$TypesOfHouses,levels = c(1, 2, 3),labels = c("Wood", "Semi-Concrete", "Concrete"))
+
+str(survey)
+
+### Question A1D
+mean(survey$Respondent)
+mean(survey$PersonsAtHome)
+mean(survey$SiblingsAtSchool)
+
+### Question A1E
+survey[1:5, ]
+
+### Question A1F
+types_houses <- survey$TypesOfHouses
+types_houses
+
+### Question A1G
+survey[survey$Sex == "Male" & survey$FathersOccupation == "Farmer", ]
+
+### Question A1H
+survey[survey$Sex == "Female" & survey$SiblingsAtSchool >= 5, ]
+
+### Question A2
+Checking that all six vectors have the same length is necessary because each row in the data frame must represent one respondent. If the lengths are different, the data may not match the correct respondents.
+
+### Question A3
+ Categorical variables include Sex and TypesOfHouses because their numbers represent labels or groups, not actual quantities. The other variables that represent counts should be treated as numerical data because they show actual amounts. Treating Sex as a quantity would be misleading because calculating its average would not have a meaningful interpretation.
+ 
+### Question A4
+Using Sex == 1 filters the respondents based on the numeric code 1. Someone unfamiliar with the legend might misunderstand the results because they would not know what category the number represents. This shows why understanding and labeling coded data is important before analyzing it.
+
+### Question A5
+nrow(survey[survey$Sex == "Male", ])
+sum(survey$Sex == "Male")
+Only 3 out of 20 respondents are male. This very small sample size means any pattern observed among males, such as a common occupation or house type, could easily be a coincidence rather than a real trend.
+
+### Question A6
+ R does not automatically know the meaning of each variable because it only sees how the data is stored. Even if Sex and TypesOfHouses contain numbers, they represent categories rather than actual quantities. This shows that the way data is stored is different from what the data actually means.
+
+### Question A7
+ The mean of PersonsAtHome at 6.65 is meaningful because it represents an actual average count of people living in a household, which is a real and interpretable quantity. The mean of Sex at 1.85 is not meaningful because sex is a category encoded as 1 and 2, and the average of those codes has no real-world interpretation.
+```
